@@ -26,13 +26,13 @@ def run_video_architecture():
     print("\n2. Sending data to Zoho GLM 4.7 Flash for NLP processing...")
     
     # Using your actual real token from Postman
-    api_token = "1000.da1daf52002c3ccf0850d7ef2d5b7113.775628d82c0ff0e3cf808d9eee6ef175" 
-    url = "https://api.catalyst.zoho.in/quickml/v1/project/46199000000013024/glm/chat"
+    api_token = "Your actual Token" 
+    url = "your link"
     
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Zoho-oauthtoken {api_token}",
-        "CATALYST-ORG": "60075406816"
+        "CATALYST-ORG": "***********"
     }
     
     # THE FIX: Split the payload exactly as shown in image_31a9e5.png
