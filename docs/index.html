@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Netra — Cyber Eye | KSP Datathon 2026</title>
+<meta name="description" content="Project Netra (Cyber Eye) — an AI-assisted crime data intelligence prototype built on Zoho Catalyst for the Karnataka State Police Datathon 2026.">
+<style>
+  :root{
+    --bg:#070a12;
+    --bg2:#0c111d;
+    --card:#111827;
+    --line:#1e293b;
+    --line2:#2b3a52;
+    --txt:#e6edf7;
+    --muted:#8fa3bf;
+    --accent:#38bdf8;
+    --accent2:#22d3ee;
+    --gold:#f5b642;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(7,10,18,.82);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:14px;height:62px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .brand svg{flex:none}
+  .nav .spacer{flex:1}
+  .nav a.link{
+    color:var(--muted);font-size:14px;font-weight:500;padding:6px 2px;
+  }
+  .nav a.link:hover{color:var(--txt);text-decoration:none}
+  @media(max-width:720px){.nav a.link{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(700px 340px at 78% 6%, rgba(56,189,248,.16), transparent 62%),
+      radial-gradient(560px 300px at 8% 92%, rgba(245,182,66,.09), transparent 60%);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(56,189,248,.055) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(56,189,248,.055) 1px,transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(ellipse 85% 65% at 50% 30%,#000 25%,transparent 78%);
+    -webkit-mask-image:radial-gradient(ellipse 85% 65% at 50% 30%,#000 25%,transparent 78%);
+  }
+  .hero-inner{position:relative;z-index:2;padding:74px 0 62px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--accent2);border:1px solid rgba(34,211,238,.28);
+    background:rgba(34,211,238,.07);border-radius:999px;padding:6px 13px;margin-bottom:22px;
+  }
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);box-shadow:0 0 0 3px rgba(34,211,238,.18)}
+  h1{
+    font-size:clamp(2.1rem,5.4vw,3.5rem);line-height:1.08;margin:0 0 18px;
+    letter-spacing:-.028em;font-weight:800;
+  }
+  h1 .grad{
+    background:linear-gradient(96deg,var(--accent) 0%,var(--accent2) 55%,#a78bfa 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .lede{font-size:clamp(1rem,2.1vw,1.16rem);color:var(--muted);max-width:660px;margin:0 0 30px}
+  .lede strong{color:#cbd8ea;font-weight:600}
+  .btns{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:11px 20px;border-radius:9px;font-weight:600;font-size:14.5px;
+    border:1px solid var(--line2);color:var(--txt);background:var(--bg2);
+    transition:transform .13s ease,border-color .13s ease,background .13s ease;
+  }
+  .btn:hover{text-decoration:none;transform:translateY(-1px);border-color:#3d5372}
+  .btn.primary{
+    background:linear-gradient(180deg,#38bdf8,#0ea5e9);border-color:#0ea5e9;color:#04121c;
+    box-shadow:0 8px 26px -12px rgba(56,189,248,.7);
+  }
+  .btn.primary:hover{background:linear-gradient(180deg,#4cc7fb,#22aee8)}
+
+  /* ---------- stats strip ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    margin-top:52px;position:relative;z-index:2;
+  }
+  .stat{background:var(--bg2);padding:20px 18px}
+  .stat .n{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums}
+  .stat .l{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:3px}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* ---------- sections ---------- */
+  section{padding:66px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  h2{
+    font-size:clamp(1.35rem,3vw,1.8rem);margin:0 0 10px;letter-spacing:-.02em;font-weight:750;
+    display:flex;align-items:center;gap:11px;
+  }
+  h2::before{content:"";width:3px;height:22px;border-radius:2px;background:linear-gradient(var(--accent),var(--accent2))}
+  .sub{color:var(--muted);margin:0 0 34px;max-width:680px;font-size:15px}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:860px){.grid3{grid-template-columns:1fr}}
+  .card{
+    background:linear-gradient(180deg,var(--card),#0d1420);
+    border:1px solid var(--line);border-radius:13px;padding:24px 22px;
+    transition:border-color .16s ease,transform .16s ease;
+  }
+  .card:hover{border-color:#31465f;transform:translateY(-2px)}
+  .card .ico{
+    width:38px;height:38px;border-radius:9px;display:grid;place-items:center;margin-bottom:15px;
+    background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.24);
+  }
+  .card h3{margin:0 0 8px;font-size:1.02rem;font-weight:700;letter-spacing:-.01em}
+  .card p{margin:0;color:var(--muted);font-size:14.2px}
+
+  /* ---------- architecture ---------- */
+  .arch{
+    background:var(--bg2);border:1px solid var(--line);border-radius:13px;
+    padding:34px 26px;display:flex;align-items:center;justify-content:center;
+    gap:8px;flex-wrap:wrap;
+  }
+  .node{
+    flex:1 1 160px;min-width:150px;text-align:center;
+    background:linear-gradient(180deg,#131c2b,#0e1622);
+    border:1px solid var(--line2);border-radius:11px;padding:16px 12px;
+  }
+  .node .tag{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent2);font-weight:700}
+  .node .nm{font-weight:700;font-size:14.2px;margin-top:5px}
+  .node .ds{font-size:12.2px;color:var(--muted);margin-top:3px}
+  .arrow{color:#38506e;font-size:20px;flex:none;padding:0 2px}
+  @media(max-width:860px){.arrow{transform:rotate(90deg);width:100%;text-align:center}}
+
+  /* ---------- chips ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{
+    font-size:12.8px;font-family:var(--mono);
+    padding:6px 12px;border-radius:7px;
+    background:rgba(148,163,184,.08);border:1px solid var(--line2);color:#c2d0e4;
+  }
+
+  /* ---------- steps ---------- */
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:0;display:grid;gap:14px}
+  ol.steps li{
+    counter-increment:s;position:relative;padding-left:44px;
+    color:var(--muted);font-size:14.5px;
+  }
+  ol.steps li::before{
+    content:counter(s);position:absolute;left:0;top:1px;
+    width:27px;height:27px;border-radius:50%;display:grid;place-items:center;
+    font-size:12.5px;font-weight:700;color:var(--accent);
+    background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);
+  }
+  ol.steps li b{color:var(--txt);font-weight:600}
+
+  /* ---------- code ---------- */
+  pre{
+    background:#0a0f18;border:1px solid var(--line);border-radius:11px;
+    padding:18px 20px;overflow:auto;margin:16px 0 0;
+    font-family:var(--mono);font-size:13.2px;line-height:1.75;color:#c9d6e8;
+  }
+  pre .c{color:#5c7290}
+  pre .k{color:var(--accent2)}
+
+  /* ---------- notice ---------- */
+  .notice{
+    display:flex;gap:14px;align-items:flex-start;
+    background:rgba(245,182,66,.055);border:1px solid rgba(245,182,66,.24);
+    border-left:3px solid var(--gold);border-radius:10px;padding:17px 19px;
+    font-size:14px;color:#d8c9a8;
+  }
+  .notice svg{flex:none;margin-top:2px}
+  .notice b{color:var(--gold)}
+
+  /* ---------- repo layout table ---------- */
+  .tbl{width:100%;border-collapse:collapse;font-size:14px}
+  .tbl th{
+    text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2);
+    color:var(--muted);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  }
+  .tbl td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td:first-child{font-family:var(--mono);color:var(--accent);white-space:nowrap;font-size:13px}
+  .tbl b{color:var(--txt);font-weight:600}
+
+  /* ---------- footer ---------- */
+  footer{padding:40px 0 54px;color:#6d809b;font-size:13.4px}
+  footer .fl{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="#38bdf8" stroke-width="1.4" opacity=".45"/>
+        <circle cx="16" cy="16" r="9.5" stroke="#22d3ee" stroke-width="1.4" opacity=".7"/>
+        <circle cx="16" cy="16" r="4.2" fill="#38bdf8"/>
+        <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="#22d3ee" stroke-width="1.4" opacity=".55"/>
+      </svg>
+      <span>Project Netra</span>
+    </div>
+    <div class="spacer"></div>
+    <a class="link" href="#what">Overview</a>
+    <a class="link" href="#architecture">Architecture</a>
+    <a class="link" href="#layout">Repo</a>
+    <a class="link" href="#run">Run it</a>
+    <a class="link" href="https://github.com/shridhar-1/Project-Netra">GitHub ↗</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span class="dot"></span>KSP Datathon 2026 · Team Cyber Eye</span>
+    <h1>Project Netra<br><span class="grad">Cyber Eye for crime data intelligence</span></h1>
+    <p class="lede">
+      A working prototype that turns Karnataka Police FIR records — <strong>synthetic, purpose-built for the datathon</strong> —
+      into searchable, connected intelligence: query the data in plain language, surface patterns across
+      districts and case categories, and get AI-assisted briefings instead of raw tables.
+      Built on <strong>Zoho Catalyst</strong> (serverless functions + web client) with a local SQLite data layer.
+    </p>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/shridhar-1/Project-Netra">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        View source
+      </a>
+      <a class="btn" href="#run">How to run it</a>
+      <a class="btn" href="https://github.com/shridhar-1/Project-Netra/blob/main/schema.pdf">Data schema (PDF)</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n">56 MB</div><div class="l">Synthetic FIR dataset</div></div>
+      <div class="stat"><div class="n">Catalyst</div><div class="l">Serverless backend</div></div>
+      <div class="stat"><div class="n">SQLite</div><div class="l">Query layer</div></div>
+      <div class="stat"><div class="n">AI agents</div><div class="l">Assisted analysis</div></div>
+    </div>
+  </div>
+</div>
+
+<section id="what">
+  <div class="wrap">
+    <h2>What it does</h2>
+    <p class="sub">Three capabilities, built around the reality that investigators don't have time to hand-trawl spreadsheets.</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="ico">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+        </div>
+        <h3>Search &amp; retrieve</h3>
+        <p>Query FIR records by district, crime category, date range or free text, and get results back in seconds instead of opening files one at a time.</p>
+      </div>
+      <div class="card">
+        <div class="ico">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.9" stroke-linecap="round"><path d="M3 17l5-6 4 3 4-6 5 4"/><path d="M3 21h18"/></svg>
+        </div>
+        <h3>Pattern surfacing</h3>
+        <p>Aggregate across thousands of records to spot clusters and trends — where categories are rising, which stations or districts stand out.</p>
+      </div>
+      <div class="card">
+        <div class="ico">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.9" stroke-linecap="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="4.2"/></svg>
+        </div>
+        <h3>AI-assisted briefing</h3>
+        <p>An agent layer (Agent VEDA) turns retrieved records into a written summary — a starting point for a human, never a replacement for one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="wrap">
+    <h2>Architecture</h2>
+    <p class="sub">Standard Catalyst shape: a static client talking to a serverless function, which owns all data access.</p>
+    <div class="arch">
+      <div class="node">
+        <div class="tag">Client</div>
+        <div class="nm">Web app</div>
+        <div class="ds">HTML / JS · Catalyst hosted</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="tag">Backend</div>
+        <div class="nm">netra_backend</div>
+        <div class="ds">Catalyst function</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="tag">Data</div>
+        <div class="nm">FIR dataset</div>
+        <div class="ds">SQLite · synthetic</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="tag">Agent</div>
+        <div class="nm">VEDA</div>
+        <div class="ds">Analysis / summarisation</div>
+      </div>
+    </div>
+    <div class="notice" style="margin-top:22px">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#f5b642" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 8v5M12 16.4v.2"/></svg>
+      <div>
+        <b>This GitHub Pages site is a showcase only.</b> The live application needs the Catalyst serverless
+        function to answer data requests, which static hosting cannot run. The working app stays on its
+        Catalyst deployment; this page exists so the project can be understood without spinning anything up.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="layout">
+  <div class="wrap">
+    <h2>Repository layout</h2>
+    <p class="sub">The final build is at the root of the app folder; earlier iterations are kept intact under <code style="font-family:var(--mono);font-size:13px;color:#c2d0e4">archive/</code>.</p>
+    <table class="tbl">
+      <tr><th>Path</th><th>What's in it</th></tr>
+      <tr><td>KSP_Official_Build/</td><td><b>The final Catalyst project.</b> Contains <code>catalyst.json</code>, the web client, and the <code>netra_backend</code> function — this is the folder you deploy from.</td></tr>
+      <tr><td>KSP_Official_Build/client/</td><td>Front-end: <code>index.html</code>, <code>client-package.json</code>.</td></tr>
+      <tr><td>KSP_Official_Build/functions/netra_backend/</td><td>Serverless backend: entry point, Catalyst config, dependencies.</td></tr>
+      <tr><td>karnataka_police_fir.db</td><td>Synthetic FIR dataset (SQLite, 56 MB) — generated for the datathon. No real police records.</td></tr>
+      <tr><td>synthetic_data/</td><td>Generators and intermediate data used to build the dataset.</td></tr>
+      <tr><td>schema.pdf</td><td>Data model and field documentation.</td></tr>
+      <tr><td>archive/</td><td>Earlier builds (Agent VEDA, first datathon attempt, working drafts), preserved for history.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="run">
+  <div class="wrap">
+    <h2>Running it locally</h2>
+    <p class="sub">You need Node.js and the Zoho Catalyst CLI.</p>
+    <ol class="steps">
+      <li><b>Install the Catalyst CLI</b> — <code style="font-family:var(--mono);font-size:13px">npm i -g zcatalyst-cli</code></li>
+      <li><b>Log in</b> — <code style="font-family:var(--mono);font-size:13px">catalyst login</code></li>
+      <li><b>Go to the project root</b> — <code style="font-family:var(--mono);font-size:13px">cd KSP_Official_Build</code> (this is where <code style="font-family:var(--mono);font-size:13px">catalyst.json</code> lives)</li>
+      <li><b>Serve it</b> — <code style="font-family:var(--mono);font-size:13px">catalyst serve</code>, or deploy with <code style="font-family:var(--mono);font-size:13px">catalyst deploy</code></li>
+    </ol>
+    <pre><span class="c"># clone</span>
+git clone https://github.com/shridhar-1/Project-Netra.git
+<span class="k">cd</span> Project-Netra/KSP_Official_Build
+
+<span class="c"># backend deps</span>
+<span class="k">cd</span> functions/netra_backend
+npm install
+<span class="k">cd</span> ../..
+
+<span class="c"># bind to your own Catalyst project, then run</span>
+catalyst login
+catalyst serve</pre>
+    <p style="color:var(--muted);font-size:13.6px;margin-top:14px">
+      Note: <code style="font-family:var(--mono);font-size:13px">.catalystrc</code> is intentionally not committed — it's your personal
+      project binding. <code style="font-family:var(--mono);font-size:13px">catalyst login</code> recreates it.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Tech stack</h2>
+    <p class="sub">Picked for one reason: a datathon team needed to ship a data-heavy app without managing servers.</p>
+    <div class="chips">
+      <span class="chip">Zoho Catalyst</span>
+      <span class="chip">Catalyst Functions</span>
+      <span class="chip">Node.js</span>
+      <span class="chip">JavaScript</span>
+      <span class="chip">SQLite</span>
+      <span class="chip">Python</span>
+      <span class="chip">AI agents / LLM</span>
+      <span class="chip">HTML · CSS</span>
+    </div>
+    <div class="notice" style="margin-top:30px">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#f5b642" stroke-width="2" stroke-linecap="round"><path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 9.5v4.2M12 17v.2"/></svg>
+      <div>
+        <b>Prototype, not a production system.</b> Dataset is synthetic, generated for the Karnataka State
+        Police Datathon 2026. This is an independent team submission and is not an official KSP product,
+        and it isn't connected to any real police database.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap fl">
+    <div>Project Netra · <b style="color:#93a7c2;font-weight:600">Team Cyber Eye</b> · KSP Datathon 2026</div>
+    <div><a href="https://github.com/shridhar-1/Project-Netra">github.com/shridhar-1/Project-Netra</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
