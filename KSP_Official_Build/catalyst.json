@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "targets": [
+      "netra_backend"
+    ],
+    "ignore": [],
+    "source": "functions"
+  },
+  "client": {
+    "source": "client"
+  }
+}

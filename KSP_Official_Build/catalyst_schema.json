@@ -1,0 +1,312 @@
+{
+  "project": "PoliceFIRSystem",
+  "tables": [
+    {
+      "table_name": "CrimeHead",
+      "columns": [
+        {
+          "column_name": "CrimeHeadID",
+          "data_type": "bigint",
+          "is_unique": true,
+          "is_mandatory": true,
+          "search_index_enabled": true
+        },
+        {
+          "column_name": "CrimeGroupName",
+          "data_type": "varchar",
+          "max_length": 255,
+          "is_mandatory": true,
+          "search_index_enabled": true
+        },
+        {
+          "column_name": "Active",
+          "data_type": "boolean",
+          "default": true
+        }
+      ]
+    },
+    {
+      "table_name": "CrimeSubHead",
+      "columns": [
+        {
+          "column_name": "CrimeSubHeadID",
+          "data_type": "bigint",
+          "is_unique": true,
+          "is_mandatory": true,
+          "search_index_enabled": true
+        },
+        {
+          "column_name": "CrimeHeadID",
+          "data_type": "bigint",
+          "is_mandatory": true,
+          "foreign_key": "CrimeHead.CrimeHeadID"
+        },
+        {
+          "column_name": "CrimeHeadName",
+          "data_type": "varchar",
+          "max_length": 255,
+          "is_mandatory": true,
+          "search_index_enabled": true
+        },
+        {
+          "column_name": "SeqID",
+          "data_type": "int"
+        }
+      ]
+    },
+    {
+      "table_name": "CaseMaster",
+      "columns": [
+        {
+          "column_name": "CaseMasterID",
+          "data_type": "bigint",
+          "is_unique": true,
+          "is_mandatory": true
+        },
+        {
+          "column_name": "CrimeNo",
+          "data_type": "varchar",
+          "max_length": 100,
+          "is_unique": true
+        },
+        {
+          "column_name": "CaseNo",
+          "data_type": "varchar",
+          "max_length": 50
+        },
+        {
+          "column_name": "CrimeRegisteredDate",
+          "data_type": "date"
+        },
+        {
+          "column_name": "PolicePersonID",
+          "data_type": "bigint"
+        },
+        {
+          "column_name": "PoliceStationID",
+          "data_type": "bigint"
+        },
+        {
+          "column_name": "CaseCategoryID",
+          "data_type": "int"
+        },
+        {
+          "column_name": "GravityOffenceID",
+          "data_type": "int"
+        },
+        {
+          "column_name": "CrimeMajorHeadID",
+          "data_type": "bigint",
+          "foreign_key": "CrimeHead.CrimeHeadID"
+        },
+        {
+          "column_name": "CrimeMinorHeadID",
+          "data_type": "bigint",
+          "foreign_key": "CrimeSubHead.CrimeSubHeadID",
+          "description": "Critical for enrichment"
+        },
+        {
+          "column_name": "CaseStatusID",
+          "data_type": "int"
+        },
+        {
+          "column_name": "CourtID",
+          "data_type": "bigint"
+        },
+        {
+          "column_name": "IncidentFromDate",
+          "data_type": "datetime"
+        },
+        {
+          "column_name": "IncidentToDate",
+          "data_type": "datetime"
+        },
+        {
+          "column_name": "InfoReceivedPSDate",
+          "data_type": "datetime"
+        },
+        {
+          "column_name": "latitude",
+          "data_type": "double"
+        },
+        {
+          "column_name": "longitude",
+          "data_type": "double"
+        },
+        {
+          "column_name": "BriefFacts",
+          "data_type": "text",
+          "max_length": 10000
+        }
+      ]
+    },
+    {
+      "table_name": "ComplainantDetails",
+      "columns": [
+        {
+          "column_name": "ComplainantID",
+          "data_type": "bigint",
+          "is_unique": true,
+          "is_mandatory": true
+        },
+        {
+          "column_name": "CaseMasterID",
+          "data_type": "bigint",
+          "foreign_key": "CaseMaster.CaseMasterID"
+        },
+        {
+          "column_name": "ComplainantName",
+          "data_type": "varchar",
+          "max_length": 255
+        },
+        {
+          "column_name": "AgeYear",
+          "data_type": "int"
+        },
+        {
+          "column_name": "OccupationID",
+          "data_type": "int"
+        },
+        {
+          "column_name": "ReligionID",
+          "data_type": "int"
+        },
+        {
+          "column_name": "CasteID",
+          "data_type": "int"
+        },
+        {
+          "column_name": "GenderID",
+          "data_type": "int"
+        }
+      ]
+    },
+    {
+      "table_name": "Victim",
+      "columns": [
+        {
+          "column_name": "VictimMasterID",
+          "data_type": "bigint",
+          "is_unique": true,
+          "is_mandatory": true
+        },
+        {
+          "column_name": "CaseMasterID",
+          "data_type": "bigint",
+          "foreign_key": "CaseMaster.CaseMasterID"
+        },
+        {
+          "column_name": "VictimName",
+          "data_type": "varchar",
+          "max_length": 255
+        },
+        {
+          "column_name": "AgeYear",
+          "data_type": "int"
+        },
+        {
+          "column_name": "GenderID",
+          "data_type": "int"
+        },
+        {
+          "column_name": "VictimPolice",
+          "data_type": "varchar",
+          "max_length": 5
+        }
+      ]
+    },
+    {
+      "table_name": "Accused",
+      "columns": [
+        {
+          "column_name": "AccusedMasterID",
+          "data_type": "bigint",
+          "is_unique": true,
+          "is_mandatory": true
+        },
+        {
+          "column_name": "CaseMasterID",
+          "data_type": "bigint",
+          "foreign_key": "CaseMaster.CaseMasterID"
+        },
+        {
+          "column_name": "AccusedName",
+          "data_type": "varchar",
+          "max_length": 255
+        },
+        {
+          "column_name": "AgeYear",
+          "data_type": "int"
+        },
+        {
+          "column_name": "GenderID",
+          "data_type": "int"
+        },
+        {
+          "column_name": "PersonID",
+          "data_type": "varchar",
+          "max_length": 50
+        }
+      ]
+    },
+    {
+      "table_name": "ArrestSurrender",
+      "columns": [
+        {
+          "column_name": "ArrestSurrenderID",
+          "data_type": "bigint",
+          "is_unique": true,
+          "is_mandatory": true
+        },
+        {
+          "column_name": "CaseMasterID",
+          "data_type": "bigint",
+          "foreign_key": "CaseMaster.CaseMasterID"
+        },
+        {
+          "column_name": "ArrestSurrenderTypeID",
+          "data_type": "int"
+        },
+        {
+          "column_name": "ArrestSurrenderDate",
+          "data_type": "date"
+        },
+        {
+          "column_name": "ArrestSurrenderStateId",
+          "data_type": "int"
+        },
+        {
+          "column_name": "ArrestSurrenderDistrictId",
+          "data_type": "int"
+        },
+        {
+          "column_name": "PoliceStationID",
+          "data_type": "bigint"
+        },
+        {
+          "column_name": "IOID",
+          "data_type": "bigint"
+        },
+        {
+          "column_name": "CourtID",
+          "data_type": "bigint"
+        },
+        {
+          "column_name": "AccusedMasterID",
+          "data_type": "bigint",
+          "foreign_key": "Accused.AccusedMasterID"
+        },
+        {
+          "column_name": "IsAccused",
+          "data_type": "boolean",
+          "default": true
+        },
+        {
+          "column_name": "IsComplainantAccused",
+          "data_type": "boolean",
+          "default": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+UnitID,UnitName,UnitTypeID,Taluk,Active
+1,Karnataka State Police HQ,1,Bengaluru,1
+2,Uttara Kannada SP Office,3,Karwar,1
+3,Honnavar DySP Office,4,Honnavar,1
+4,Honnavar Circle Office,5,Honnavar,1
+5,Honnavar Town Police Station,6,Honnavar,1
+6,Honnavar Rural Police Station,6,Honnavar,1
+7,Manki Police Station,6,Honnavar,1
+8,Gerusoppa Police Station,6,Honnavar,1
+9,Idagunji Outpost,10,Honnavar,1
+10,Honnavar Traffic Police Station,9,Honnavar,1
+11,Karwar Circle Office,5,Karwar,1
+12,Karwar Town Police Station,6,Karwar,1
+13,Ankola Circle Office,5,Ankola,1
+14,Ankola Town Police Station,6,Ankola,1
+15,Kumta Circle Office,5,Kumta,1
+16,Kumta Town Police Station,6,Kumta,1
+17,Bhatkal Circle Office,5,Bhatkal,1
+18,Bhatkal Town Police Station,6,Bhatkal,1
+19,Sirsi Circle Office,5,Sirsi,1
+20,Sirsi Town Police Station,6,Sirsi,1
+21,Siddapur Circle Office,5,Siddapur,1
+22,Siddapur Town Police Station,6,Siddapur,1
+23,Yellapur Circle Office,5,Yellapur,1
+24,Yellapur Town Police Station,6,Yellapur,1
+25,Mundgod Circle Office,5,Mundgod,1
+26,Mundgod Town Police Station,6,Mundgod,1
+27,Haliyal Circle Office,5,Haliyal,1
+28,Haliyal Town Police Station,6,Haliyal,1
+29,Joida Circle Office,5,Joida,1
+30,Joida Town Police Station,6,Joida,1
+31,Dandeli Circle Office,5,Dandeli,1
+32,Dandeli Town Police Station,6,Dandeli,1

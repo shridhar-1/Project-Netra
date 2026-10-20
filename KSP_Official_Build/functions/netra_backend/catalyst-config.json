@@ -1,0 +1,14 @@
+{
+  "deployment": {
+    "name": "netra_backend",
+    "stack": "node24",
+    "type": "advancedio",
+    "main": "index.js",
+    "env_variables": {
+      "NETRA_PROJECT_ID": "4619900000013024",
+      "NETRA_ORG_ID": "60075406816",
+      "NETRA_DOC_ID": "1456000000003003",
+      "NETRA_CONN_NAME": "netra_ai_v2"
+    }
+  }
+}

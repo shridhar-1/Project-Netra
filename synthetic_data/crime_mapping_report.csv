@@ -1,0 +1,21 @@
+CrimeHeadName,StoryCategory,Cases
+Theft,THEFT,1083
+Arms Act Violation,ARMS,1073
+Attempt to Murder,ATTEMPT_MURDER,1051
+Non-Fatal Road Accidents,ROAD_ACCIDENT,1038
+Rape,RAPE,1038
+NDPS (Drugs),NDPS,1037
+Dowry Death,DOWRY_DEATH,1026
+Assault on Women,HURT,1018
+Hurt / Grievous Hurt,GRIEVOUS_HURT,1013
+Extortion,EXTORTION,1011
+Rioting,RIOT,1010
+Cyber Fraud,CYBER,1002
+Cheating / Fraud,CHEATING,995
+Robbery,ROBBERY,983
+Criminal Breach of Trust,CHEATING,973
+Burglary,BURGLARY,954
+Murder,MURDER,951
+Kidnapping & Abduction,KIDNAP,939
+Fatal Road Accidents,ROAD_ACCIDENT,932
+Dacoity,DACOITY,873

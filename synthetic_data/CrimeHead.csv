@@ -1,0 +1,21 @@
+CrimeHeadID,CrimeGroupName,Active
+1,Murder,1
+2,Attempt to Murder,1
+3,Rape,1
+4,Kidnapping & Abduction,1
+5,Dacoity,1
+6,Robbery,1
+7,Burglary,1
+8,Theft,1
+9,Rioting,1
+10,Criminal Breach of Trust,1
+11,Cheating / Fraud,1
+12,Extortion,1
+13,Dowry Death,1
+14,Assault on Women,1
+15,Hurt / Grievous Hurt,1
+16,Fatal Road Accidents,1
+17,Non-Fatal Road Accidents,1
+18,Cyber Fraud,1
+19,NDPS (Drugs),1
+20,Arms Act Violation,1
